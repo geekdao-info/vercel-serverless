@@ -2,7 +2,6 @@
 name: 'multichain'
 
 on:
-  push:
   schedule:
     - cron: '*/5 * * * *'
 
