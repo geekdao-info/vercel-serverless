@@ -2,6 +2,7 @@
 name: 'fetch multichain'
 
 on:
+  push:
   schedule:
     - cron: '32 */4 * * *'
 
