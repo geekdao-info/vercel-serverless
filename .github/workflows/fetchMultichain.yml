@@ -3,7 +3,7 @@ name: 'fetch multichain'
 
 on:
   schedule:
-    - cron: '32 */4 * * *'
+    - cron: '32 */2 * * *'
 
 jobs:
   bot:
