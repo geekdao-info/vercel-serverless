@@ -30,7 +30,7 @@ module.exports = async (req: NowRequest, res: NowResponse) => {
     const resultData = await requestGet()
     const client = await MongoClient.connect(CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
     const db = await client.db('multichain');
-    db.collection("stable").insertOne(...resultData);
+    db.collection("stable").insertOne({timestamp: new Date().getTime(), ...resultData});
     res.status(200).json({result: 'ok'});
 }
 
