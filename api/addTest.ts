@@ -5,7 +5,7 @@ module.exports = async (req: NowRequest, res: NowResponse) => {
     const client = await MongoClient.connect(CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
     const db = await client.db('test');
     let datetime = new Date().getTime();
-    db.collection("test").insertOne({name: '你好', datetime: datetime});
+    db.collection("test").insertOne({name: '你好', timestamp: datetime, date: new Date()});
     res.status(200).json({result: 'ok'});
 }
 

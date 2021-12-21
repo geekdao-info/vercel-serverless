@@ -1,0 +1,15 @@
+## multichain cross-chain router Protocol
+name: 'multichain'
+
+on:
+  push:
+    schedule:
+      - cron: '0 */1 * * * ?'
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Run multichain.sh' # 执行shell命令文件
+        run: npm run multichain
+
