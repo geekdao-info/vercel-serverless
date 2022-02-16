@@ -1,0 +1,16 @@
+## multichain cross-chain router Protocol
+name: 'fetch multichain'
+
+on:
+  schedule:
+    - cron: '32 */2 * * *'
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'check codes'
+        uses: actions/checkout@master
+      - name: 'Run multichainFetch.sh' # 执行shell命令文件
+        run: bash multichainFetch.sh
+
