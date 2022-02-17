@@ -1,4 +1,4 @@
-name: "fetch Ink-protocol Party Info"
+name: "fetch Ink-protocol Players"
 
 on:
   schedule:
