@@ -36,7 +36,7 @@ module.exports = async (req: NowRequest, res: NowResponse) => {
         });
     });
   }
-  const players = [];
+  let players = [];
   const fetchData = async (startAddress: string | null) => {
     try {
       const playersRes = await requestGet(startAddress);
@@ -45,13 +45,18 @@ module.exports = async (req: NowRequest, res: NowResponse) => {
         tempPlayers.length === 1 &&
         tempPlayers[0]?.address === startAddress
       ) {
+        const client = await MongoClient.connect(CONNECTION_STRING, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+        });
         const db = await client.db("inker-data");
         const saveData = {
           players: players.length,
           create: Date.now(),
         };
-        db.collection("total_deposit").insertOne(saveData);
+        db.collection("players").insertOne(saveData);
         res.status(200).json({ result: "ok" });
+        return;
       }
       // 第二次开始查询时 上次的最后一条和这次的第一条一样，需要去除
       if (startAddress) {
