@@ -31,13 +31,13 @@ module.exports = async (req: NowRequest, res: NowResponse) => {
     let partyTotalAmount = 0;
     let partyPlayersCount = 0;
     resultData.result.parties.forEach((v) => {
-      partyTotalAmount += v.total_deposit;
+      partyTotalAmount += v.total_deposit / 1e6;
       partyPlayersCount += v.current_member;
     });
     const saveData = {
       partyCount: resultData.result.parties.length,
       create: Date.now(),
-      partyTotalAmount: partyTotalAmount / 1e6,
+      partyTotalAmount: partyTotalAmount,
       partyPlayersCount,
     };
     db.collection("party_info").insertOne(saveData);
