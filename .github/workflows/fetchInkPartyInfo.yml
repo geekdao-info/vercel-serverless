@@ -2,7 +2,7 @@ name: "fetch Ink-protocol Party Info"
 
 on:
   schedule:
-    - cron: "05 19 * * *"
+    - cron: "5 11 * * *"
 
 jobs:
   bot:
