@@ -3,7 +3,7 @@ name: "fetch Ink-protocol Total Deposit"
 
 on:
   schedule:
-    - cron: "3 11 * * *"
+    - cron: "18 15 * * *"
 
 jobs:
   bot:
