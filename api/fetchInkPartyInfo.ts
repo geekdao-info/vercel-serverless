@@ -1,5 +1,6 @@
 import { NowRequest, NowResponse } from "@vercel/node";
 import { MongoClient } from "mongodb";
+import math from "mathjs";
 // @ts-ignore
 import axios from "axios";
 const CONNECTION_STRING =
@@ -31,13 +32,17 @@ module.exports = async (req: NowRequest, res: NowResponse) => {
     let partyTotalAmount = 0;
     let partyPlayersCount = 0;
     resultData.result.parties.forEach((v) => {
-      partyTotalAmount += v.total_deposit / 1e6;
+      partyTotalAmount =
+        math.bignumber(partyTotalAmount) + math.bignumber(v.total_deposit);
       partyPlayersCount += v.current_member;
     });
     const saveData = {
       partyCount: resultData.result.parties.length,
       create: Date.now(),
-      partyTotalAmount: partyTotalAmount,
+      partyTotalAmount: math.divide(
+        math.bignumber(partyTotalAmount),
+        math.bignumber(1e6)
+      ),
       partyPlayersCount,
     };
     db.collection("party_info").insertOne(saveData);
