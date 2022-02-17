@@ -3,7 +3,7 @@ name: "fetch Ink-protocol Party"
 
 on:
   schedule:
-    - cron: "*/2 * * * *"
+    - cron: "*/10 * * * *"
 
 jobs:
   bot:
