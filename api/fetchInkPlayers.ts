@@ -5,11 +5,26 @@ import axios from "axios";
 const CONNECTION_STRING =
   "mongodb+srv://mr7s:utjfSY8YE56WLNv@cluster0.uncsh.mongodb.net/multichain?retryWrites=true&w=majority";
 module.exports = async (req: NowRequest, res: NowResponse) => {
-  async function requestGet() {
+  async function requestGet(startAddress) {
     return new Promise((resolve, reject) => {
+      const queryMsg = {
+        players: {
+          sid: 0,
+          start_address: startAddress,
+          end_address: null,
+          limit: 1000,
+        },
+      };
+      const encodeQueryMsg = JSON.stringify(queryMsg);
+      const requestParams = {
+        params: {
+          query_msg: encodeQueryMsg,
+        },
+      };
       axios
         .get(
-          "https://fcd.terra.dev/wasm/contracts/terra1nlsfl8djet3z70xu2cj7s9dn7kzyzzfz5z2sd9/store?query_msg=%7B%22strategy%22:%7B%22sid%22:0%7D%7D"
+          "https://lcd.terra.dev/wasm/contracts/terra1nlsfl8djet3z70xu2cj7s9dn7kzyzzfz5z2sd9/store",
+          requestParams
         )
         .then(function (response) {
           // console.log(response.data);
@@ -24,8 +39,8 @@ module.exports = async (req: NowRequest, res: NowResponse) => {
   const players = [];
   const fetchData = async (startAddress: string | null) => {
     try {
-      const playersRes = await queryPlayers(startAddress);
-      const tempPlayers = playersRes.data?.result?.players;
+      const playersRes = await requestGet(startAddress);
+      const tempPlayers = playersRes?.result?.players;
       if (
         tempPlayers.length === 1 &&
         tempPlayers[0]?.address === startAddress
