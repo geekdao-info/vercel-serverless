@@ -1,15 +1,14 @@
-## multichain cross-chain router Protocol
-name: "fetch Ink-protocol Party"
+name: "fetch Ink-protocol Party Info"
 
 on:
   schedule:
-    - cron: "45 14 * * *"
+    - cron: "05 19 * * *"
 
 jobs:
   bot:
     runs-on: ubuntu-latest
     steps:
-      - name: "check codes"
+      - name: "check env"
         uses: actions/checkout@master
       - name: "Run fetchInkPartyInfo.sh" # 执行shell命令文件
         run: bash fetchInkPartyInfo.sh
