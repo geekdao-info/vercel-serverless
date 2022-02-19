@@ -7,7 +7,7 @@ module.exports = async (req: VercelRequest, res: VercelResponse) => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  const db = await client.db("test");
-  const result = await db.collection("test").find().toArray();
+  const db = await client.db("inker-data");
+  const result = await db.collection("party_info").find().toArray();
   res.status(200).json(result);
 };

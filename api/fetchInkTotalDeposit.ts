@@ -1,10 +1,10 @@
-import { NowRequest, NowResponse } from "@vercel/node";
+import { VercelRequest, VercelResponse } from "@vercel/node";
 import { MongoClient } from "mongodb";
 // @ts-ignore
 import axios from "axios";
 const CONNECTION_STRING =
   "mongodb+srv://mr7s:utjfSY8YE56WLNv@cluster0.uncsh.mongodb.net/multichain?retryWrites=true&w=majority";
-module.exports = async (req: NowRequest, res: NowResponse) => {
+module.exports = async (req: VercelRequest, res: VercelResponse) => {
   async function requestGet() {
     return new Promise((resolve, reject) => {
       axios
